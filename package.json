@@ -1,0 +1,20 @@
+{
+  "name": "replay-selenium-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "RECORD_ALL_CONTENT=1 REPLAY_BROWSER_PATH='/Users/filiphric/.replay/runtimes/Replay-Chromium.app/Contents/MacOS/Chromium' node spec.js",
+    "upload": "replay upload-all",
+    "postinstall": "cd app && npm install",
+    "dev": "cd app && npm run dev"
+  },
+  "keywords": [],
+  "author": "Filip Hric",
+  "license": "ISC",
+  "dependencies": {
+    "@replayio/replay": "^0.20.0",
+    "assert": "^2.1.0",
+    "selenium-webdriver": "^4.16.0"
+  }
+}
