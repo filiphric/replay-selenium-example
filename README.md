@@ -10,6 +10,7 @@ npm run dev
 ```
 
 ## Running tests
+To run tests with Replay Browser, you need to add `REPLAY_BROWSER_PATH` to your environment.
 ```sh
 npm test
 ```
