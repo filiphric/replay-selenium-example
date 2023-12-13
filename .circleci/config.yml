@@ -1,0 +1,15 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build_and_test: # this can be any name you choose
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npx @replayio/replay update-browsers chromium
+          name: Update browsers
