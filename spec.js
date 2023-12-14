@@ -1,9 +1,12 @@
-const { Builder, Browser, By, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
+import { Builder, Browser, By, until } from 'selenium-webdriver';
+import { Options } from 'selenium-webdriver/chrome.js';
+import { getPlaywrightBrowserPath } from "@replayio/replay";
+const chromiumPath = getPlaywrightBrowserPath("chromium");
 
 (async function test() {
-  let options = new chrome.Options();
-  options.setChromeBinaryPath(process.env.REPLAY_BROWSER_PATH);
+  let options = new Options();
+  options.setChromeBinaryPath(chromiumPath);
+  options.headless()
 
   let driver = await new Builder()
     .forBrowser(Browser.CHROME)
@@ -12,6 +15,7 @@ const chrome = require('selenium-webdriver/chrome');
 
     try {
       await driver.get('http://localhost:3000');
+      await driver.sleep(2000)
       await driver.findElement(By.xpath("//*[text()='Add to Cart']")).click();
       await driver.wait(until.elementLocated(By.xpath("//*[text()='Product added to cart!']")), 5000);
     } finally {
