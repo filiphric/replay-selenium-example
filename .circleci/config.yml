@@ -11,9 +11,6 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: npm
-      - run:
-          name: Update Replay browsers
-          command: npx @replayio/replay update-browsers chromium
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run: 
