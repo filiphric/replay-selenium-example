@@ -1,0 +1,31 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+  browser-tools: circleci/browser-tools@1.4.6
+jobs:
+  replay:
+    environment: 
+      RECORD_ALL_CONTENT: 1
+    executor: node/default 
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run: 
+          name: Run the local app
+          command: npm run dev
+          background: true
+      - run:
+          name: Run e2e tests 
+          command: npm test
+      - run:
+          name: Upload replays
+          when: always
+          command: npx @replayio/replay upload-all
+      
+workflows:
+  replay-workflow:
+    jobs:
+      - replay
